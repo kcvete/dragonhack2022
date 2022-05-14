@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     },
 });
 
-function Main({ user }) {
+function Main(props) {
     console.log("hello world")
     const ref = React.useRef(null);
 
@@ -32,7 +32,7 @@ function Main({ user }) {
                         <Route path="/contact" ref={ref} element={<Contact />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/profile/:username" element={<Profile />} />
-                        <Route path="/image" element={<ImageCapturer />} />
+                        <Route path="/image" element={<ImageCapturer uid="3Ae240raO8q8FuGEKGsb" tid="Y2tcxKovbCTVzbXVRiAY" />} />
                     </Routes>
                 </div>
             </List>

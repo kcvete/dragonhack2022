@@ -1,8 +1,14 @@
 import React, { useState, useCallback, useMemo } from "react";
-
 import ImageCapture from "react-image-data-capture";
+import { getDatabase, ref, set } from "firebase/database";
+import { doc, setDoc, collection } from "firebase/firestore";
+import { getFirestore } from 'firebase/firestore'
 
-const ImageCapturer = () => {
+const ImageCapturer = (props) => {
+  // Get a database reference
+  const db = getFirestore();
+
+
   const [showImgCapture, setShowImgCapture] = useState(true);
   const config = useMemo(() => ({ video: true }), []);
   /*
@@ -12,7 +18,7 @@ const ImageCapturer = () => {
   */
   const [imgSrc, setImgSrc] = useState(null);
   const [imgFile, setImgFile] = useState(null);
-  const onCapture = (imageData) => {
+  const onCapture = async (imageData) => {
     // read as webP
     setImgSrc(imageData.webP);
     // read as file
@@ -21,6 +27,29 @@ const ImageCapturer = () => {
     setShowImgCapture(false);
 
     //Upload to Imgur and to firebase
+    let data = {
+      tid: props.tid,
+      uid: props.uid,
+      image: "test"
+    };
+
+    // Add a new document in collection "completed_tasks"
+    // const res = await db.collection('completed_tasks').add(data);
+
+    debugger
+    // Add a new document in collection "cities"
+    const ref = doc(db, "completed_tasks", "23728163");
+    await setDoc(ref, {
+      tid: props.tid,
+      uid: props.uid,
+      image: "test"
+    });
+
+    // set(ref(db, 'completed_tasks/id123'), {
+    //   tid: props.tid,
+    //   uid: props.uid,
+    //   image: "test"
+    // });
   };
   const onError = useCallback((error) => {
     console.log(error);
