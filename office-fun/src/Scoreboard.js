@@ -17,8 +17,6 @@ export default function StickyHeadTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = useState([]);
 
-
-
   useEffect(() => {
     const db = getFirestore();
     const q = query(collection(db, "users"), orderBy("points", "desc"));
@@ -34,7 +32,9 @@ export default function StickyHeadTable() {
         results.push({
           rank: i,
           name: data.name,
-          points: data.points
+          points: data.points,
+          redeemable: data.redeemable,
+          avatar: data.avatar
         });
         i++;
       });
@@ -43,8 +43,6 @@ export default function StickyHeadTable() {
 
     getRows();
   }, []);
-
-
 
   const columns = [
     { id: "name", label: "Mesto", minWidth: 170 },

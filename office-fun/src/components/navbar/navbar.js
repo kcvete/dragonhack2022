@@ -1,6 +1,7 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import RestoreIcon from '@mui/icons-material/Restore';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { makeStyles } from '@mui/styles';
@@ -37,6 +38,9 @@ function Navbar() {
       </NavLink>
       <NavLink to="/contact">
         <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+      </NavLink>
+      <NavLink to="/scoreboard">
+        <BottomNavigationAction label="Scoreboard" icon={<FormatListNumberedIcon />} />
       </NavLink>
       <NavLink to="/image">
         <BottomNavigationAction label="Image" icon={<LocationOnIcon />} />
