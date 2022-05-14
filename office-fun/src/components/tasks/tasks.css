@@ -1,0 +1,45 @@
+.task-list {
+  display: grid;
+  row-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.task-card {
+  width: 300px;
+  min-height: 150px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.task-image {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+
+.card-content {
+  padding: 10px;
+  height: calc(100% - 20px);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.task-title {
+  font-size: 18px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
