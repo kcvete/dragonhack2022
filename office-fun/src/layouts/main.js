@@ -11,6 +11,7 @@ import Contact from '../components/contact/Contact';
 import Home from '../components/home/Home';
 import ImageCapturer from '../components/ImageCapturer';
 import Navbar from '../components/navbar/navbar';
+import TaskDetails from '../components/tasks/tasks-details';
 import TasksList from '../components/tasks/tasksList';
 import Profile from '../components/user/profile';
 
@@ -36,7 +37,7 @@ function Main({ user }) {
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/image" element={<ImageCapturer />} />
             <Route path="/tasks" element={<TasksList />} />
-            <Route path="/task-details/:id" element={<TasksList />} />
+            <Route path="/task-details/" element={<TaskDetails />} />
           </Routes>
         </div>
       </List>
