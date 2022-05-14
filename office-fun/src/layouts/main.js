@@ -26,15 +26,13 @@ function Main({ user }) {
         <Box sx={{ pb: 7 }} ref={ref}>
             <CssBaseline />
             <List>
-                <div className="content">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/contact" ref={ref} element={<Contact />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/profile/:username" element={<Profile />} />
-                        <Route path="/image" element={<ImageCapturer />} />
-                    </Routes>
-                </div>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/contact" ref={ref} element={<Contact />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/profile/:username" element={<Profile />} />
+                    <Route path="/image" element={<ImageCapturer />} />
+                </Routes>
             </List>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 <Navbar></Navbar>
