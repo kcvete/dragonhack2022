@@ -32,14 +32,11 @@ function Navbar() {
       }}
       showlabel
     >
-      <NavLink exact="/" to="/">
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+      <NavLink to="/tasks">
+        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
       </NavLink>
       <NavLink to="/contact">
         <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-      </NavLink>
-      <NavLink to="/tasks">
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
       </NavLink>
       <NavLink to="/image">
         <BottomNavigationAction label="Image" icon={<LocationOnIcon />} />

@@ -3,6 +3,7 @@ import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import * as React from 'react';
+import ImageCapturer from '../ImageCapturer';
 
 import templateImage from '../../assets/template-image.png';
 
@@ -53,7 +54,7 @@ function TaskDetails() {
       </div>
 
       <div className="large-image">
-        <img className="template-image-icon" src={taskImage} />
+        <ImageCapturer/>
       </div>
 
       <div className="button-row">

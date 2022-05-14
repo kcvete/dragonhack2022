@@ -31,7 +31,7 @@ function Main({ user }) {
       <List>
         <div className="content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<TasksList />} />
             <Route path="/contact" ref={ref} element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/profile/:username" element={<Profile />} />

@@ -20,6 +20,18 @@ const ImageCapturer = (props) => {
   const [imgFile, setImgFile] = useState(null);
   const [img, setImg] = useState(null);
 
+
+  const uploadToFirebase = async (url) => {
+
+    const ref_c = doc(db, "completed_tasks", Math.floor(Math.random() * 1000000).toString());
+    await setDoc(ref_c, {
+      tid: props.tid,
+      uid: props.uid,
+      image: url
+    });
+  };
+
+
   const onCapture = async (imageData) => {
     // read as webP
     setImgSrc(imageData.webP);
@@ -37,22 +49,17 @@ const ImageCapturer = (props) => {
         .then((url) => {
           console.log(url);
           setImg(url);
+          uploadToFirebase(url);
         })
     });
 
-    //Upload to Imgur and to firebase
-    let data = {
-      tid: props.tid,
-      uid: props.uid,
-      image: "test"
-    };
     // Add a new document in collection "cities"
-    const ref_c = doc(db, "completed_tasks", "23728163");
+   /* const ref_c = doc(db, "completed_tasks", "23728163");
     await setDoc(ref_c, {
       tid: props.tid,
       uid: props.uid,
       image: "test"
-    });
+    });*/
   };
   const onError = useCallback((error) => {
     console.log(error);
