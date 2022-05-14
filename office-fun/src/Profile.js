@@ -13,8 +13,8 @@ export default function Profile() {
         sx={{ width: 180, height: 180 }}
       />
 
-      <p className="name"> Matic Šincek</p>
-      <p className="text-points">Software developer</p>
+      <p className="name text-center">Matic Šincek</p>
+      <p className="text-points text-center">Software developer</p>
       <div className="profile-facts">
         <div className="fact">
           <div className="fact-title">Rank</div>
@@ -29,7 +29,9 @@ export default function Profile() {
           <div className="class-description">10</div>
         </div>
       </div>
-      <Button variant="contained">Contained</Button>
+      <div className="button-container">
+        <Button variant="contained">Redeem</Button>
+      </div>
     </div>
   );
 }
