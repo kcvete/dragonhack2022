@@ -20,18 +20,6 @@ const ImageCapturer = (props) => {
   const [imgFile, setImgFile] = useState(null);
   const [img, setImg] = useState(null);
 
-
-  const uploadToFirebase = async (url) => {
-
-    const ref_c = doc(db, "completed_tasks", Math.floor(Math.random() * 1000000).toString());
-    await setDoc(ref_c, {
-      tid: props.tid,
-      uid: props.uid,
-      image: url
-    });
-  };
-
-
   const onCapture = async (imageData) => {
     // read as webP
     setImgSrc(imageData.webP);
@@ -39,17 +27,16 @@ const ImageCapturer = (props) => {
     setImgFile(imageData.file);
     // Unmount component to stop the video track and release camera
     setShowImgCapture(false);
-
-    const storageRef = ref(storage, 'some-child');
+    const imageName= Math.floor(Math.random() * 1000000).toString()
+    const storageRef = ref(storage, imageName);
 
     // 'file' comes from the Blob or File API
     uploadBytes(storageRef, imageData.blob).then((snapshot) => {
       console.log('Uploaded a blob or file!');
-      getDownloadURL(ref(storage, 'some-child'))
+      getDownloadURL(ref(storage, imageName))
         .then((url) => {
-          console.log(url);
-          setImg(url);
-          uploadToFirebase(url);
+          console.log('succesful: ', url);
+          props.func(url);
         })
     });
 
@@ -78,13 +65,6 @@ const ImageCapturer = (props) => {
           width={400}
           userMediaConfig={config}
         />
-      )}
-      {imgSrc && (
-        <div>
-          <div>Captured Image:</div>
-          <img src={imgSrc} alt="captured-img" />
-          <img src={img} alt="stored-img" />
-        </div>
       )}
     </>
   );
