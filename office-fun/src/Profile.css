@@ -1,0 +1,55 @@
+.centered {
+  display: block;
+  margin: auto;
+}
+
+.name {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.profile-facts {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 30px;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.fact {
+  display: inline-block;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.middle {
+  margin: auto;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fact-title {
+  color: black;
+  font-size: 1.2em;
+  padding-bottom: 5px;
+}
+
+.fact-description {
+  color: lightgray;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
