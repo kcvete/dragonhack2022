@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 
 import Login from './components/Login';
 import firebase from './services/firebase';
-import Home from './components/Home';
 
 import './App.css';
+import Main from './layouts/main';
 
 
 
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div className="app">
-      {user ? <Home user={user} /> : <Login />}
+      {user ? <Main user={user} /> : <Login />}
     </div>
   );
 }
