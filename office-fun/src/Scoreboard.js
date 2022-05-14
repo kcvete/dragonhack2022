@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,33 +9,66 @@ import Avatar from "@mui/material/Avatar";
 import TableRow from "@mui/material/TableRow";
 import CardHeader from "@mui/material/CardHeader";
 
-const columns = [
-  { id: "name", label: "Mesto", minWidth: 170 },
-  {
-    id: "slika",
-    label: "",
-    minWidth: 170,
-    align: "left",
-  },
-  { id: "code", label: "Sodelavec", minWidth: 100 },
-  {
-    id: "population",
-    label: "Točke",
-    minWidth: 170,
-    align: "left",
-  },
-];
-
-const rows = [
-  { rank: 1, name: "Matic", points: "12" },
-  { rank: 2, name: "Kevin", points: "12" },
-  { rank: 3, name: "Matic", points: "12" },
-  { rank: 4, name: "Kevin", points: "12" },
-];
+import { doc, setDoc, collection, query, where, getDocs, orderBy } from "firebase/firestore";
+import { getFirestore } from 'firebase/firestore'
 
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rows, setRows] = useState([]);
+
+
+
+  useEffect(() => {
+    const db = getFirestore();
+    const q = query(collection(db, "users"), orderBy("points", "desc"));
+
+    async function getRows() {
+      const querySnapshot = await getDocs(q)
+      var results = [];
+      var i = 1;
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        let data = doc.data();
+
+        results.push({
+          rank: i,
+          name: data.name,
+          points: data.points
+        });
+        i++;
+      });
+      setRows(results);
+    }
+
+    getRows();
+  }, []);
+
+
+
+  const columns = [
+    { id: "name", label: "Mesto", minWidth: 170 },
+    {
+      id: "slika",
+      label: "",
+      minWidth: 170,
+      align: "left",
+    },
+    { id: "code", label: "Sodelavec", minWidth: 100 },
+    {
+      id: "population",
+      label: "Točke",
+      minWidth: 170,
+      align: "left",
+    },
+  ];
+
+  // const rows = [
+  //   { rank: 1, name: "Matic", points: "12" },
+  //   { rank: 2, name: "Kevin", points: "12" },
+  //   { rank: 3, name: "Matic", points: "12" },
+  //   { rank: 4, name: "Kevin", points: "12" },
+  // ];
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -48,7 +81,7 @@ export default function StickyHeadTable() {
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -61,16 +94,17 @@ export default function StickyHeadTable() {
             {rows.map((row) => (
               <TableRow style={{ fontSize: "4rem" }} key={row.name}>
                 <TableCell align="left">{row.rank}</TableCell>
-                <CardHeader
-                  avatar={
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg"
-                    />
-                  }
-                  title={row.name}
-                />
-
+                <TableCell>
+                  <CardHeader
+                    avatar={
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg"
+                      />
+                    }
+                    title={row.name}
+                  />
+                </TableCell>
                 {/*<TableCell align="right">{row.name}</TableCell>*/}
                 <TableCell align="left">{row.points}</TableCell>
               </TableRow>
