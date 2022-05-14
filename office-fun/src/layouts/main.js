@@ -37,7 +37,7 @@ function Main({ user }) {
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/image" element={<ImageCapturer />} />
             <Route path="/tasks" element={<TasksList />} />
-            <Route path="/task-details/" element={<TaskDetails />} />
+            <Route path="/task-details/:id" element={<TaskDetails />} />
           </Routes>
         </div>
       </List>
