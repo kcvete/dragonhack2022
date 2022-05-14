@@ -44,7 +44,7 @@ function Navbar() {
     >
       <NavLink exact="/" to="/"><BottomNavigationAction label="Recents" icon={<RestoreIcon />} /></NavLink>
       <NavLink to="/contact"><BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} /></NavLink>
-      <NavLink to="/about"><BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} /></NavLink>
+      <NavLink to="/scoreboard"><BottomNavigationAction label="Scoreboard" icon={<LocationOnIcon />} /></NavLink>
       <NavLink to="/image"><BottomNavigationAction label="Image" icon={<LocationOnIcon />} /></NavLink>
     </BottomNavigation>
   )

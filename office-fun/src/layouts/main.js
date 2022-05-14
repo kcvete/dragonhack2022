@@ -11,6 +11,8 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
+import Scoreboard from '../Scoreboard';
+
 
 const useStyles = makeStyles({
     root: {
@@ -29,7 +31,7 @@ function Main(props) {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/contact" ref={ref} element={<Contact />} />
-                    <Route path="/about" element={<About />} />
+                    <Route path="/scoreboard" element={<Scoreboard />} />
                     <Route path="/profile/:username" element={<Profile />} />
                     <Route path="/image" element={<ImageCapturer uid="3Ae240raO8q8FuGEKGsb" tid="Y2tcxKovbCTVzbXVRiAY" />} />
                 </Routes>
