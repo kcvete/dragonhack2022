@@ -3,6 +3,9 @@
     "rules": "database.rules.json"
   },
   "hosting": {
+    "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR/..\" run build"
+    ],
     "public": "public",
     "ignore": [
       "firebase.json",
