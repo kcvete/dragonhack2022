@@ -1,6 +1,5 @@
 import React from 'react';
 
-import ImageCapturer from './ImageCapturer';
 import { auth } from '../services/firebase'
 
 import '../App.css';
@@ -11,8 +10,6 @@ const Home = ({ user }) => {
             <h1>Hello, <span></span>{user.displayName}</h1>
             <img src={user.photoURL} alt="" />
             <button className="button signout" onClick={() => auth.signOut()}>Sign out</button>
-
-            <ImageCapturer />
         </div>
     )
 }
