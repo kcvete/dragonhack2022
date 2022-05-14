@@ -3,9 +3,6 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "predeploy": [
-      "npm --prefix ./office-fun/ run build"
-    ],
     "public": "public",
     "ignore": [
       "firebase.json",
