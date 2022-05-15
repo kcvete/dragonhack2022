@@ -8,6 +8,7 @@ import ImageCapturer from '../ImageCapturer';
 import { getFirestore } from 'firebase/firestore'
 import { doc, setDoc, collection, query, where, getDocs, getDoc, orderBy } from "firebase/firestore";
 import UsersDropdown from './usersDropdown';
+import TaskDescription from './task-description';
 
 import templateImage from '../../assets/template-image.png';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -20,20 +21,20 @@ function TaskDetails(props) {
   const [age, setAge] = React.useState("");
   const [image, setImage] = React.useState("");
   const [user, setUser] = React.useState({});
+  const [task, setTask] = React.useState({});
   const { id } = useParams()
-  const [task, setTask] = React.useState([]);
 
-  useEffect(() => {
-    const db = getFirestore();
+  // useEffect(() => {
+  //   const db = getFirestore();
 
-    async function getData() {
-      const docRef = doc(db, "tasks", id);
-      const taskTmp = await getDoc(docRef);
-      const taskData = taskTmp.data();
-      setTask(taskData)
-    }
-    getData();
-  }, []);
+  //   async function getData() {
+  //     const docRef = doc(db, "tasks", id);
+  //     const taskTmp = await getDoc(docRef);
+  //     const taskData = taskTmp.data();
+  //     setTask(taskData)
+  //   }
+  //   getData();
+  // }, []);
 
 
   const uploadToFirebase = async () => {
@@ -76,6 +77,10 @@ function TaskDetails(props) {
     setUser(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
   }
 
+  const getTask = (data) => {
+    setTask(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
+  }
+
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -85,11 +90,7 @@ function TaskDetails(props) {
 
   return (
     <div className="task-details">
-      <div className="section-title">{task.title}</div>
-      <div className="detail-points-row">
-        <span className="points-number">{task.points}</span>
-        <span> points</span>
-      </div>
+      <TaskDescription func={getTask}></TaskDescription>
       <UsersDropdown func={getUser}></UsersDropdown>
       <div className="large-image">
         <ImageCapturer func={pull_data} />
