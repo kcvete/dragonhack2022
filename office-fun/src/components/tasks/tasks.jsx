@@ -23,7 +23,7 @@ function TaskCard(props) {
             <span> points</span>
           </div>
         </div>
-        <NavLink to={"../task-details/" + props.id}>
+        <NavLink points={props.points} to={"../task-details/" + props.id}>
           <Button variant="contained">Award</Button>
         </NavLink>
       </div>

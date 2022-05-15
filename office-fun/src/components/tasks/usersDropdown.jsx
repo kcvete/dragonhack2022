@@ -38,7 +38,7 @@ function UsersDropdown(props) {
 
   const handleChange = (event) => {
     setAge(event.target.value);
-
+    debugger
     props.func(event.target.value)
   };
 
@@ -53,7 +53,7 @@ function UsersDropdown(props) {
           onChange={handleChange}
         >
           {people.map((element) => (
-            <MenuItem value={element.id}>
+            <MenuItem value={element}>
               <div className="center-row">
                 <img className="avatar-icon" src={element.avatar} />
                 <div>{element.name}</div>

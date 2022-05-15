@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ImageCapturer from '../ImageCapturer';
 import { getFirestore } from 'firebase/firestore'
-import { doc, setDoc, collection, query, where, getDocs, orderBy } from "firebase/firestore";
+import { doc, setDoc, collection, query, where, getDocs, getDoc, orderBy } from "firebase/firestore";
 import UsersDropdown from './usersDropdown';
 
 import templateImage from '../../assets/template-image.png';
@@ -19,8 +19,22 @@ function TaskDetails(props) {
   const navigate = useNavigate();
   const [age, setAge] = React.useState("");
   const [image, setImage] = React.useState("");
-  const [user, setUser] = React.useState("");
+  const [user, setUser] = React.useState({});
   const { id } = useParams()
+  const [task, setTask] = React.useState([]);
+
+  useEffect(() => {
+    const db = getFirestore();
+
+    async function getData() {
+      const docRef = doc(db, "tasks", id);
+      const taskTmp = await getDoc(docRef);
+      const taskData = taskTmp.data();
+      setTask(taskData)
+    }
+    getData();
+  }, []);
+
 
   const uploadToFirebase = async () => {
     console.log("uploading to firebase");
@@ -31,7 +45,7 @@ function TaskDetails(props) {
     try {
       await setDoc(ref_c, {
         tid: id,
-        uid: user,
+        uid: user.id,
         image: image,
         timestamp: Date.now()
       });
@@ -39,6 +53,15 @@ function TaskDetails(props) {
       setTimeout(() => {
         navigate("/");
       }, 2000);
+
+      const ref_user = doc(db, "users", user.id.toString());
+      await setDoc(ref_user, {
+        name: user.name,
+        avatar: user.avatar,
+        points: user.points + task.points,
+        redeemable: user.redeemable + task.points
+      });
+
     } catch (error) {
       console.log('error: ', error);
       toast.error("Could not award points");
@@ -62,9 +85,9 @@ function TaskDetails(props) {
 
   return (
     <div className="task-details">
-      <div className="section-title">Task title</div>
+      <div className="section-title">{task.title}</div>
       <div className="detail-points-row">
-        <span className="points-number">10</span>
+        <span className="points-number">{task.points}</span>
         <span> points</span>
       </div>
       <UsersDropdown func={getUser}></UsersDropdown>
