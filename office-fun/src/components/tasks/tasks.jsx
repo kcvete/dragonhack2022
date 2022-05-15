@@ -5,13 +5,14 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import { NavLink } from 'react-router-dom';
 
+
 function TaskCard(props) {
   return (
     <Card sx={{ display: "flex" }} className="task-card">
       <CardMedia
         component="img"
         className="task-image"
-        image="https://www.ikea.com/au/en/images/products/monstera-potted-plant-swiss-cheese-plant__0902106_pe640705_s5.jpg?f=s"
+        image={props.image}
         alt="Live from space album cover"
       />
       <div className="card-content">

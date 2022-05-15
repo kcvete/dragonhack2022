@@ -2,24 +2,25 @@ import { Button } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import * as React from 'react';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ImageCapturer from '../ImageCapturer';
-import { doc, setDoc, collection } from "firebase/firestore";
 import { getFirestore } from 'firebase/firestore'
+import { doc, setDoc, collection, query, where, getDocs, orderBy } from "firebase/firestore";
+import UsersDropdown from './usersDropdown';
+
+import templateImage from '../../assets/template-image.png';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
-import templateImage from '../../assets/template-image.png';
-
 
 
 function TaskDetails(props) {
   const navigate = useNavigate();
   const [age, setAge] = React.useState("");
-  const [uid, setUid] = React.useState("");
-  const [tid, setTid] = React.useState("");
   const [image, setImage] = React.useState("");
+  const [user, setUser] = React.useState("");
+  const { id } = useParams()
 
   const uploadToFirebase = async () => {
     console.log("uploading to firebase");
@@ -29,9 +30,10 @@ function TaskDetails(props) {
     const ref_c = doc(db, "completed_tasks", Math.floor(Math.random() * 1000000).toString());
     try {
       await setDoc(ref_c, {
-        tid: "5151515",
-        uid: "5151515151",
-        image: image
+        tid: id,
+        uid: user,
+        image: image,
+        timestamp: Date.now()
       });
       toast("Succesfully awarded points.");
       setTimeout(() => {
@@ -41,25 +43,20 @@ function TaskDetails(props) {
       console.log('error: ', error);
       toast.error("Could not award points");
     }
-};
+  };
 
   const pull_data = (data) => {
     setImage(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
+  }
+
+  const getUser = (data) => {
+    setUser(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
   }
 
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-
-  const people = [
-    {
-      name: "Kevin Cvetežar",
-      image:
-        "https://www.ikea.com/au/en/images/products/monstera-potted-plant-swiss-cheese-plant__0902106_pe640705_s5.jpg?f=s",
-    },
-    { name: "Matic Šincek", image: "" },
-  ];
 
   const taskImage = templateImage;
 
@@ -70,33 +67,13 @@ function TaskDetails(props) {
         <span className="points-number">10</span>
         <span> points</span>
       </div>
-      <div className="label-row">
-        <span className="form-label">Employee: </span>
-        <FormControl sx={{ m: 1, minWidth: 170 }} size="small">
-          <Select
-            id="demo-select-small"
-            value={age}
-            displayEmpty
-            onChange={handleChange}
-          >
-            {people.map((element) => (
-              <MenuItem value={element.name}>
-                <div className="center-row">
-                  <img className="avatar-icon" src={element.image} />
-                  <div>{element.name}</div>
-                </div>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
-
+      <UsersDropdown func={getUser}></UsersDropdown>
       <div className="large-image">
-        <ImageCapturer  func={pull_data}/>
+        <ImageCapturer func={pull_data} />
       </div>
 
       <div className="button-row">
-        <Button   onClick={uploadToFirebase} variant="contained">Continue</Button>
+        <Button onClick={uploadToFirebase} variant="contained">Continue</Button>
       </div>
     </div>
   );
