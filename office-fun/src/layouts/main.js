@@ -15,7 +15,7 @@ import TaskDetails from '../components/tasks/tasks-details';
 import TasksList from '../components/tasks/tasksList';
 import AwardsDetails from '../components/awards/awards-details';
 import AwardsList from '../components/awards/awardsList';
-import Profile from '../components/user/profile';
+import Profile from '../Profile';
 import Scoreboard from '../Scoreboard';
 
 
@@ -38,7 +38,7 @@ function Main({ user }) {
             <Route path="/" element={<TasksList />} />
             <Route path="/contact" ref={ref} element={<Contact />} />
             <Route path="/about" element={<About />} />
-            <Route path="/profile/:username" element={<Profile />} />
+            <Route path="/profile" element={<Profile user={user} />} />
             <Route path="/image" element={<ImageCapturer />} />
             <Route path="/awards" element={<AwardsList />} />
             <Route path="/award-details/:id" element={<AwardsDetails />} />
