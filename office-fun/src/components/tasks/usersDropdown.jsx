@@ -38,7 +38,6 @@ function UsersDropdown(props) {
 
   const handleChange = (event) => {
     setAge(event.target.value);
-    debugger
     props.func(event.target.value)
   };
 
