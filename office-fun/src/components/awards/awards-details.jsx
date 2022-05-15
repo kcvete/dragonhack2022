@@ -8,6 +8,8 @@ import ImageCapturer from '../ImageCapturer';
 import { getFirestore } from 'firebase/firestore'
 import { doc, setDoc, collection, query, where, getDocs, getDoc, orderBy } from "firebase/firestore";
 import UsersDropdown from './usersDropdown';
+import CardMedia from '@mui/material/CardMedia';
+
 
 import templateImage from '../../assets/template-image.png';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -25,7 +27,8 @@ function AwardDetails(props) {
   const award = {
     points: localStorage.getItem("points-reward"),
     title: localStorage.getItem("title-reward"),
-    id: localStorage.getItem("id-reward")
+    id: localStorage.getItem("id-reward"),
+    image: localStorage.getItem("image-reward")
   }
 
   const uploadToFirebase = async () => {
@@ -82,6 +85,12 @@ function AwardDetails(props) {
 
   return (
     <div className="award-details">
+      <CardMedia
+        component="img"
+        className="award-image"
+        image={award.image}
+        alt="Live from space album cover"
+      />
       <div className="section-title">{award.title}</div>
       <div className="detail-points-row">
         <span className="points-number">{award.points}</span>
@@ -93,7 +102,7 @@ function AwardDetails(props) {
       </div>
 
       <div className="button-row">
-        <Button onClick={uploadToFirebase} variant="contained">Continue</Button>
+        <Button onClick={uploadToFirebase} variant="contained">Redeem</Button>
       </div>
     </div>
   );

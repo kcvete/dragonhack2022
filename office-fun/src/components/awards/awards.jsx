@@ -12,7 +12,7 @@ function AwardCard(props) {
     localStorage.setItem("title-reward", props.title);
     localStorage.setItem("points-reward", props.points);
     localStorage.setItem("id-reward", props.id);
-
+    localStorage.setItem("image-reward", props.image);
   };
 
   return (
@@ -31,7 +31,7 @@ function AwardCard(props) {
             <span> points</span>
           </div>
         </div>
-        <NavLink points={props.points} to={"../award-details/" + props.id}>
+        <NavLink to={"../award-details/" + props.id}>
           <Button onClick={saveToLocalStorage} variant="contained">Award</Button>
         </NavLink>
       </div>
