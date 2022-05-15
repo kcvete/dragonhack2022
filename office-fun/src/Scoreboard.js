@@ -104,9 +104,9 @@ export default function StickyHeadTable() {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell style={{ fontSize: "1.3rem" }}>Rank</TableCell>
-                <TableCell style={{ fontSize: "1.3rem" }}>Points</TableCell>
-                <TableCell style={{ fontSize: "1.3rem" }}>Name</TableCell>
+                <TableCell style={{ fontSize: "1.3rem" }}>RANK</TableCell>
+                <TableCell style={{ fontSize: "1.3rem" }}>NAME</TableCell>
+                <TableCell style={{ fontSize: "1.3rem" }}>POINTS</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
