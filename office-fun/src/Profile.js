@@ -55,7 +55,7 @@ export default function Profile(props) {
           <div className="class-description">{userEntity.points}</div>
         </div>
         <div className="fact">
-          <div className="fact-title">Redeemable points</div>
+          <div className="fact-title">Redeemable</div>
           <div className="class-description">{userEntity.redeemable}</div>
         </div>
       </div>

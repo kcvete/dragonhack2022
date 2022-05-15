@@ -97,7 +97,7 @@ export default function StickyHeadTable() {
                     avatar={
                       <Avatar
                         alt="Remy Sharp"
-                        src="https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg"
+                        src={row.avatar}
                       />
                     }
                     title={row.name}
