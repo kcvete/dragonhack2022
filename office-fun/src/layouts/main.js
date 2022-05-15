@@ -13,7 +13,7 @@ import ImageCapturer from '../components/ImageCapturer';
 import Navbar from '../components/navbar/navbar';
 import TaskDetails from '../components/tasks/tasks-details';
 import TasksList from '../components/tasks/tasksList';
-import Profile from '../components/user/profile';
+import Profile from '../Profile';
 import Scoreboard from '../Scoreboard';
 
 const useStyles = makeStyles({
@@ -35,7 +35,7 @@ function Main({ user }) {
             <Route path="/" element={<TasksList />} />
             <Route path="/contact" ref={ref} element={<Contact />} />
             <Route path="/about" element={<About />} />
-            <Route path="/profile/:username" element={<Profile />} />
+            <Route path="/profile" element={<Profile user={user} />} />
             <Route path="/image" element={<ImageCapturer />} />
             <Route path="/tasks" element={<TasksList />} />
             <Route path="/scoreboard" element={<Scoreboard />} />

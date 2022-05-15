@@ -7,6 +7,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PersonIcon from '@mui/icons-material/Person';
 
 const useStyles = makeStyles({
   root: {
@@ -42,8 +43,8 @@ function Navbar() {
       <NavLink to="/scoreboard">
         <BottomNavigationAction label="Scoreboard" icon={<FormatListNumberedIcon />} />
       </NavLink>
-      <NavLink to="/image">
-        <BottomNavigationAction label="Image" icon={<LocationOnIcon />} />
+      <NavLink to="/profile">
+        <BottomNavigationAction label="Profile" icon={<PersonIcon />} />
       </NavLink>
     </BottomNavigation>
   );
