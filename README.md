@@ -25,3 +25,6 @@ Team Bogosort members:
 ## Screenshots
 
 ![App Screenshot](https://i.imgur.com/K3SnHsr.png)
+![App Screenshot](https://i.imgur.com/5OuAzsa.png)
+![App Screenshot](https://i.imgur.com/Om5PAoo.png)
+![App Screenshot](https://i.imgur.com/RgdPxE9.png)
