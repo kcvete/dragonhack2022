@@ -1,14 +1,13 @@
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import BurstMode from '@mui/icons-material/BurstMode';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import PersonIcon from '@mui/icons-material/Person';
+import RedeemIcon from '@mui/icons-material/Redeem';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import PersonIcon from '@mui/icons-material/Person';
 
 const useStyles = makeStyles({
   root: {
@@ -36,19 +35,22 @@ function Navbar() {
       showlabel
     >
       <NavLink to="/tasks">
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction label="Tasks" icon={<AssignmentIcon />} />
       </NavLink>
       <NavLink to="/awards">
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="Awards" icon={<RedeemIcon />} />
       </NavLink>
       <NavLink to="/scoreboard">
-        <BottomNavigationAction label="Scoreboard" icon={<FormatListNumberedIcon />} />
-      </NavLink>
-      <NavLink to="/profile">
-        <BottomNavigationAction label="Profile" icon={<PersonIcon />} />
+        <BottomNavigationAction
+          label="Leaderboard"
+          icon={<LeaderboardIcon />}
+        />
       </NavLink>
       <NavLink to="/feed">
         <BottomNavigationAction label="Feed" icon={<BurstMode />} />
+      </NavLink>
+      <NavLink to="/profile">
+        <BottomNavigationAction label="Profile" icon={<PersonIcon />} />
       </NavLink>
     </BottomNavigation>
   );
