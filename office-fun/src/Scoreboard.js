@@ -104,9 +104,9 @@ export default function StickyHeadTable() {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell style={{ fontSize: "1.3rem" }}>RANK</TableCell>
-                <TableCell style={{ fontSize: "1.3rem" }}>NAME</TableCell>
-                <TableCell style={{ fontSize: "1.3rem" }}>POINTS</TableCell>
+                <TableCell style={{ fontSize: "1.3rem" }}>Rank</TableCell>
+                <TableCell style={{ fontSize: "1.3rem" }}>Name</TableCell>
+                <TableCell style={{ fontSize: "1.3rem" }}>Points</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -121,12 +121,7 @@ export default function StickyHeadTable() {
                   <TableCell>
                     <CardHeader
                       className="card-header"
-                      avatar={
-                        <Avatar
-                          alt="Remy Sharp"
-                          src="https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg"
-                        />
-                      }
+                      avatar={<Avatar alt="Remy Sharp" src={row.avatar} />}
                       title={row.name}
                     />
                   </TableCell>
