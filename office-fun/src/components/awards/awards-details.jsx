@@ -27,7 +27,8 @@ function AwardDetails(props) {
     const db = getFirestore();
 
     async function getData() {
-      const docRef = doc(db, "awards", id);
+      debugger
+      const docRef = doc(db, "rewards", id);
       const awardTmp = await getDoc(docRef);
       const awardData = awardTmp.data();
       setAward(awardData)

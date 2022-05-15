@@ -8,8 +8,8 @@ function AwardsList() {
 
   useEffect(() => {
     const db = getFirestore();
-    const q = query(collection(db, "awards"), orderBy("points", "desc"));
-
+    const q = query(collection(db, "rewards"), orderBy("points", "desc"));
+    debugger
     async function getRows() {
       const querySnapshot = await getDocs(q)
       var results = [];
