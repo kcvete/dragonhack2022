@@ -31,7 +31,7 @@ function AwardsList() {
 
   return (
     <div>
-      <div class="section-title">Award list</div>
+      <div class="section-title">Awards list</div>
       <div class="award-list">
         {rows.map((element) => (
           <AwardCard id={element.id} title={element.title} points={element.points} image={element.image}></AwardCard>

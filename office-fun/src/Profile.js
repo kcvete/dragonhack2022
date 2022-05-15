@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import "./Profile.css";
 import { doc, setDoc, collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { getFirestore } from 'firebase/firestore'
+import { NavLink } from "react-router-dom";
 
 export default function Profile(props) {
   const [userEntity, setUserEntity] = useState([]);
@@ -28,7 +29,7 @@ export default function Profile(props) {
         };
       });
       setUserEntity(result);
-      localStorage.setItem("userId", result.id);
+      localStorage.setItem("user-local", JSON.stringify(result));
     }
 
     getUser();
@@ -60,7 +61,9 @@ export default function Profile(props) {
         </div>
       </div>
       <div className="button-container">
-        <Button variant="contained">Redeem</Button>
+        <NavLink to={"../awards"}>
+          <Button variant="contained">Redeem</Button>
+        </NavLink>
       </div>
     </div>
   );
