@@ -8,7 +8,8 @@ import ImageCapturer from '../ImageCapturer';
 import { getFirestore } from 'firebase/firestore'
 import { doc, setDoc, collection, query, where, getDocs, getDoc, orderBy } from "firebase/firestore";
 import UsersDropdown from './usersDropdown';
-import TaskDescription from './task-description';
+import CardMedia from '@mui/material/CardMedia';
+
 
 import templateImage from '../../assets/template-image.png';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -16,39 +17,31 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 
-function TaskDetails(props) {
+function AwardDetails(props) {
   const navigate = useNavigate();
   const [age, setAge] = React.useState("");
   const [image, setImage] = React.useState("");
   const [user, setUser] = React.useState({});
   const { id } = useParams()
 
-
-  const task = {
-    points: localStorage.getItem("points"),
-    title: localStorage.getItem("title"),
-    id: localStorage.getItem("id")
+  const award = {
+    points: localStorage.getItem("points-reward"),
+    title: localStorage.getItem("title-reward"),
+    id: localStorage.getItem("id-reward"),
+    image: localStorage.getItem("image-reward")
   }
 
-  // useEffect(() => {
-  //   const db = getFirestore();
-
-  //   async function getData() {
-  //     const docRef = doc(db, "tasks", id);
-  //     const taskTmp = await getDoc(docRef);
-  //     const taskData = taskTmp.data();
-  //     setTask(taskData)
-  //   }
-  //   getData();
-  // }, []);
-
-
   const uploadToFirebase = async () => {
+
+    if (parseInt(user.redeemable) - (award.points) < 0) {
+      toast.error("You do not have enough points to redeem this award.");
+      return;
+    }
     console.log("uploading to firebase");
     // Get a database reference
     const db = getFirestore();
     const storage = getStorage();
-    const ref_c = doc(db, "completed_tasks", Math.floor(Math.random() * 1000000).toString());
+    const ref_c = doc(db, "redeemed_rewards", Math.floor(Math.random() * 1000000).toString());
     try {
       await setDoc(ref_c, {
         tid: id,
@@ -62,11 +55,12 @@ function TaskDetails(props) {
       }, 2000);
 
       const ref_user = doc(db, "users", user.id.toString());
+
       await setDoc(ref_user, {
         name: user.name,
         avatar: user.avatar,
-        points: parseInt(user.points) + parseInt(task.points),
-        redeemable:  parseInt(user.redeemable) + parseInt(task.points)
+        points: parseInt(user.points),
+        redeemable: parseInt(user.redeemable) - (award.points)
       });
 
     } catch (error) {
@@ -84,26 +78,34 @@ function TaskDetails(props) {
   }
 
 
-
   const handleChange = (event) => {
     setAge(event.target.value);
   };
 
-  const taskImage = templateImage;
 
   return (
-    <div className="task-details">
-      <TaskDescription title={task.title} points={task.points}></TaskDescription>
+    <div className="award-details">
+      <CardMedia
+        component="img"
+        className="award-image"
+        image={award.image}
+        alt="Live from space album cover"
+      />
+      <div className="section-title">{award.title}</div>
+      <div className="detail-points-row">
+        <span className="points-number">{award.points}</span>
+        <span> points</span>
+      </div>
       <UsersDropdown func={getUser}></UsersDropdown>
       <div className="large-image">
         <ImageCapturer func={pull_data} />
       </div>
 
       <div className="button-row">
-        <Button onClick={uploadToFirebase} variant="contained">Continue</Button>
+        <Button onClick={uploadToFirebase} variant="contained">Redeem</Button>
       </div>
     </div>
   );
 }
 
-export default TaskDetails;
+export default AwardDetails;

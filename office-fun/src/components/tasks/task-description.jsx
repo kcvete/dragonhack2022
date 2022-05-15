@@ -8,27 +8,11 @@ import { useNavigate } from 'react-router-dom';
 
 
 function TaskDescription(props) {
-    const navigate = useNavigate();
-    const [task, setTask] = React.useState([]);
-
-    useEffect(() => {
-        const db = getFirestore();
-
-        async function getData() {
-            const docRef = doc(db, "tasks", props.task);
-            const taskTmp = await getDoc(docRef);
-            const taskData = taskTmp.data();
-            setTask(taskData)
-            props.func(taskData)
-        }
-        getData();
-    }, []);
-
     return (
         <div className="task-description">
-            <div className="section-title">{task.title}</div>
+            <div className="section-title">{props.title}</div>
             <div className="detail-points-row">
-                <span className="points-number">{task.points}</span>
+                <span className="points-number">{props.points}</span>
                 <span> points</span>
             </div>
         </div>

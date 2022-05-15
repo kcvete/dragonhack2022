@@ -37,7 +37,7 @@ function Navbar() {
       <NavLink to="/tasks">
         <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
       </NavLink>
-      <NavLink to="/contact">
+      <NavLink to="/awards">
         <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
       </NavLink>
       <NavLink to="/scoreboard">

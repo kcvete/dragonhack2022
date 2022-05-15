@@ -13,8 +13,11 @@ import ImageCapturer from '../components/ImageCapturer';
 import Navbar from '../components/navbar/navbar';
 import TaskDetails from '../components/tasks/tasks-details';
 import TasksList from '../components/tasks/tasksList';
+import AwardsDetails from '../components/awards/awards-details';
+import AwardsList from '../components/awards/awardsList';
 import Profile from '../Profile';
 import Scoreboard from '../Scoreboard';
+
 
 const useStyles = makeStyles({
   root: {
@@ -37,8 +40,10 @@ function Main({ user }) {
             <Route path="/about" element={<About />} />
             <Route path="/profile" element={<Profile user={user} />} />
             <Route path="/image" element={<ImageCapturer />} />
-            <Route path="/tasks" element={<TasksList />} />
+            <Route path="/awards" element={<AwardsList />} />
+            <Route path="/award-details/:id" element={<AwardsDetails />} />
             <Route path="/scoreboard" element={<Scoreboard />} />
+            <Route path="/tasks" element={<TasksList />} />
             <Route path="/task-details/:id" element={<TaskDetails />} />
           </Routes>
         </div>
