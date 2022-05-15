@@ -5,13 +5,11 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import { NavLink } from 'react-router-dom';
 
-
 function TaskCard(props) {
   const saveToLocalStorage = (key, value) => {
     localStorage.setItem("title", props.title);
     localStorage.setItem("points", props.points);
     localStorage.setItem("id", props.id);
-
   };
 
   return (
@@ -30,8 +28,14 @@ function TaskCard(props) {
             <span> points</span>
           </div>
         </div>
-        <NavLink points={props.points} to={"../task-details/" + props.id}>
-          <Button onClick={saveToLocalStorage} variant="contained">Award</Button>
+        <NavLink
+          className="normal-text-link"
+          points={props.points}
+          to={"../task-details/" + props.id}
+        >
+          <Button onClick={saveToLocalStorage} variant="contained">
+            Award
+          </Button>
         </NavLink>
       </div>
     </Card>
