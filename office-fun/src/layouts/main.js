@@ -16,6 +16,7 @@ import TaskDetails from '../components/tasks/tasks-details';
 import TasksList from '../components/tasks/tasksList';
 import Profile from '../Profile';
 import Scoreboard from '../Scoreboard';
+import Feed from '../components/feed/feed';
 
 const useStyles = makeStyles({
   root: {
@@ -43,6 +44,7 @@ function Main({ user }) {
             <Route path="/scoreboard" element={<Scoreboard />} />
             <Route path="/tasks" element={<TasksList />} />
             <Route path="/task-details/:id" element={<TaskDetails />} />
+            <Route path="/feed/" element={<Feed />} />
           </Routes>
         </div>
       </List>

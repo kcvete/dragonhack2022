@@ -2,6 +2,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import BurstMode from '@mui/icons-material/BurstMode';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { makeStyles } from '@mui/styles';
@@ -45,6 +46,9 @@ function Navbar() {
       </NavLink>
       <NavLink to="/profile">
         <BottomNavigationAction label="Profile" icon={<PersonIcon />} />
+      </NavLink>
+      <NavLink to="/feed">
+        <BottomNavigationAction label="Feed" icon={<BurstMode />} />
       </NavLink>
     </BottomNavigation>
   );
