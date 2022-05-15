@@ -33,14 +33,16 @@ function Feed() {
             <div class="section-title">Wall of fame</div>
             <ImageList cols={3} rowHeight={164}>
                 {rows.map((item) => (
-                    <ImageListItem key={item.image}>
-                        <img
-                            src={`${item.image}?w=164&h=164&fit=crop&auto=format`}
-                            srcSet={`${item.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                            loading="lazy"
-                            alt=""
-                        />
-                    </ImageListItem>
+                    <div>{item.id}
+                        <ImageListItem key={item.image}>
+                            <img
+                                src={`${item.image}?w=164&h=164&fit=crop&auto=format`}
+                                srcSet={`${item.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                loading="lazy"
+                                alt=""
+                            />
+                        </ImageListItem>
+                    </div>
                 ))}
             </ImageList>
         </div>
