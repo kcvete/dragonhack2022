@@ -2,32 +2,38 @@
   display: grid;
   row-gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
 }
 
 .section-title {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 10px;
+  background: #3176d2;
+  text-align: center;
+  padding: 5px 0;
+  color: white;
+  position: sticky;
+  top: 0;
 }
 
 .task-card {
   width: 300px;
   min-height: 150px;
-  padding: 10px;
   display: flex;
   align-items: center;
+  padding: 10px;
 }
 
 .task-image {
   border-radius: 50%;
   width: 100px !important;
   height: 100px !important;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .card-content {
-  padding: 10px;
-  height: calc(100% - 20px);
+  height: 100%;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -91,4 +97,8 @@
   display: flex;
   justify-content: center;
   margin-top: 40px;
+}
+
+.normal-text-link {
+  text-decoration: none;
 }
