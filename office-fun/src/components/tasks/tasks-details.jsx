@@ -7,13 +7,15 @@ import ImageCapturer from '../ImageCapturer';
 import { doc, setDoc, collection } from "firebase/firestore";
 import { getFirestore } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 import templateImage from '../../assets/template-image.png';
 
 
 
-function TaskDetails() {
+function TaskDetails(props) {
+  const navigate = useNavigate();
   const [age, setAge] = React.useState("");
   const [uid, setUid] = React.useState("");
   const [tid, setTid] = React.useState("");
@@ -25,11 +27,20 @@ function TaskDetails() {
     const db = getFirestore();
     const storage = getStorage();
     const ref_c = doc(db, "completed_tasks", Math.floor(Math.random() * 1000000).toString());
-    await setDoc(ref_c, {
-      tid: "5151515",
-      uid: "5151515151",
-      image: image
-    });
+    try {
+      await setDoc(ref_c, {
+        tid: "5151515",
+        uid: "5151515151",
+        image: image
+      });
+      toast("Succesfully awarded points.");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      console.log('error: ', error);
+      toast.error("Could not award points");
+    }
 };
 
   const pull_data = (data) => {
