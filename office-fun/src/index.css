@@ -45,3 +45,39 @@ code {
   background-color: #f2f2f2;
   margin: 10%;
 }
+
+.card-header {
+  padding: 0px !important;
+}
+
+.table-row:nth-child(odd) {
+  background-color: rgb(226, 226, 226);
+}
+
+.switcher-div {
+  display: flex;
+  width: fit-content;
+  margin: 20px auto;
+}
+
+.switcher-part {
+  background-color: #e2e2e2;
+  width: 100px;
+  padding: 5px 15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.switcher-part.selected {
+  background-color: #1976d2;
+  color: white;
+}
+
+.switcher-part.right {
+  border-radius: 0 10px 10px 0;
+}
+
+.switcher-part.left {
+  border-radius: 10px 0 0 10px;
+  border-right: 1px solid white;
+}
