@@ -20,6 +20,18 @@ const ImageCapturer = (props) => {
   const [imgFile, setImgFile] = useState(null);
   const [img, setImg] = useState(null);
 
+
+  const uploadToFirebase = async (url) => {
+
+    const ref_c = doc(db, "completed_tasks", Math.floor(Math.random() * 1000000).toString());
+    await setDoc(ref_c, {
+      tid: props.tid,
+      uid: props.uid,
+      image: url
+    });
+  };
+
+
   const onCapture = async (imageData) => {
     // read as webP
     setImgSrc(imageData.webP);
@@ -35,7 +47,8 @@ const ImageCapturer = (props) => {
       console.log('Uploaded a blob or file!');
       getDownloadURL(ref(storage, imageName))
         .then((url) => {
-          console.log('succesful: ', url);
+          console.log(url);
+          setImg(url);
           props.func(url);
         })
     });
@@ -65,6 +78,12 @@ const ImageCapturer = (props) => {
           width={400}
           userMediaConfig={config}
         />
+      )}
+      {imgSrc && (
+        <div>
+          <div>Captured Image:</div>
+          <img src={imgSrc} alt="captured-img" />
+        </div>
       )}
     </>
   );
