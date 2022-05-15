@@ -5,21 +5,14 @@ import { getFirestore } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const ImageCapturer = (props) => {
-  // Get a database reference
   const db = getFirestore();
   const storage = getStorage();
 
   const [showImgCapture, setShowImgCapture] = useState(true);
   const config = useMemo(() => ({ video: true }), []);
-  /*
-    { video: true } - Default Camera View
-    { video: { facingMode: environment } } - Back Camera
-    { video: { facingMode: "user" } } - Front Camera
-  */
   const [imgSrc, setImgSrc] = useState(null);
   const [imgFile, setImgFile] = useState(null);
   const [img, setImg] = useState(null);
-
 
   const uploadToFirebase = async (url) => {
 
@@ -31,7 +24,6 @@ const ImageCapturer = (props) => {
     });
   };
 
-
   const onCapture = async (imageData) => {
     // read as webP
     setImgSrc(imageData.webP);
@@ -39,7 +31,7 @@ const ImageCapturer = (props) => {
     setImgFile(imageData.file);
     // Unmount component to stop the video track and release camera
     setShowImgCapture(false);
-    const imageName= Math.floor(Math.random() * 1000000).toString()
+    const imageName = Math.floor(Math.random() * 1000000).toString()
     const storageRef = ref(storage, imageName);
 
     // 'file' comes from the Blob or File API
@@ -52,14 +44,6 @@ const ImageCapturer = (props) => {
           props.func(url);
         })
     });
-
-    // Add a new document in collection "cities"
-   /* const ref_c = doc(db, "completed_tasks", "23728163");
-    await setDoc(ref_c, {
-      tid: props.tid,
-      uid: props.uid,
-      image: "test"
-    });*/
   };
   const onError = useCallback((error) => {
     console.log(error);
