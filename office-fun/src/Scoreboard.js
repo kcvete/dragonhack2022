@@ -1,28 +1,27 @@
-import React, { useEffect, useState } from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import Avatar from "@mui/material/Avatar";
-import TableRow from "@mui/material/TableRow";
-import CardHeader from "@mui/material/CardHeader";
-
-import { doc, setDoc, collection, query, where, getDocs, orderBy } from "firebase/firestore";
-import { getFirestore } from 'firebase/firestore'
+import Avatar from '@mui/material/Avatar';
+import CardHeader from '@mui/material/CardHeader';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { collection, doc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = useState([]);
+  const [selectedLeaderboard, setSelectedLeaderboard] = useState(0);
 
   useEffect(() => {
     const db = getFirestore();
     const q = query(collection(db, "users"), orderBy("points", "desc"));
 
     async function getRows() {
-      const querySnapshot = await getDocs(q)
+      const querySnapshot = await getDocs(q);
       var results = [];
       var i = 1;
       querySnapshot.forEach((doc) => {
@@ -34,7 +33,7 @@ export default function StickyHeadTable() {
           name: data.name,
           points: data.points,
           redeemable: data.redeemable,
-          avatar: data.avatar
+          avatar: data.avatar,
         });
         i++;
       });
@@ -78,38 +77,66 @@ export default function StickyHeadTable() {
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer >
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              <TableCell style={{ fontSize: "1.3rem" }}>RANK</TableCell>
-              <TableCell style={{ fontSize: "1.3rem" }}>NAME</TableCell>
-              <TableCell style={{ fontSize: "1.3rem" }}>POINTS</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow style={{ fontSize: "4rem" }} key={row.name}>
-                <TableCell align="left">{row.rank}</TableCell>
-                <TableCell>
-                  <CardHeader
-                    avatar={
-                      <Avatar
-                        alt="Remy Sharp"
-                        src="https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg"
-                      />
-                    }
-                    title={row.name}
-                  />
-                </TableCell>
-                {/*<TableCell align="right">{row.name}</TableCell>*/}
-                <TableCell align="left">{row.points}</TableCell>
+    <div>
+      <div className="section-title">Leaderboard</div>
+
+      <div className="switcher-div">
+        <div
+          className={`switcher-part left ${
+            selectedLeaderboard == 0 && "selected"
+          }`}
+          onClick={() => setSelectedLeaderboard(0)}
+        >
+          Monthly
+        </div>
+        <div
+          className={`switcher-part right ${
+            selectedLeaderboard == 1 && "selected"
+          }`}
+          onClick={() => setSelectedLeaderboard(1)}
+        >
+          All time
+        </div>
+      </div>
+
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <TableContainer>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell style={{ fontSize: "1.3rem" }}>Rank</TableCell>
+                <TableCell style={{ fontSize: "1.3rem" }}>Points</TableCell>
+                <TableCell style={{ fontSize: "1.3rem" }}>Name</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  className="table-row"
+                  style={{ fontSize: "4rem" }}
+                  key={row.name}
+                >
+                  <TableCell align="left">{row.rank}</TableCell>
+                  <TableCell align="left">{row.points}</TableCell>
+                  <TableCell>
+                    <CardHeader
+                      className="card-header"
+                      avatar={
+                        <Avatar
+                          alt="Remy Sharp"
+                          src="https://thumbs.dreamstime.com/b/happy-smiling-geek-hipster-beard-man-cool-avatar-geek-man-avatar-104871313.jpg"
+                        />
+                      }
+                      title={row.name}
+                    />
+                  </TableCell>
+                  {/*<TableCell align="right">{row.name}</TableCell>*/}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </div>
   );
 }
