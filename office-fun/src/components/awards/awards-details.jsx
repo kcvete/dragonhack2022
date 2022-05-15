@@ -49,7 +49,7 @@ function AwardDetails(props) {
         image: image,
         timestamp: Date.now()
       });
-      toast("Succesfully awarded points.");
+      toast("Succesfully redeemed reward!");
       setTimeout(() => {
         navigate("/");
       }, 2000);

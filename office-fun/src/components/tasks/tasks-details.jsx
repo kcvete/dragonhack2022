@@ -58,7 +58,7 @@ function TaskDetails(props) {
       });
       toast("Succesfully awarded points.");
       setTimeout(() => {
-        navigate("/");
+        navigate("/feed");
       }, 2000);
 
       const ref_user = doc(db, "users", user.id.toString());
@@ -66,7 +66,7 @@ function TaskDetails(props) {
         name: user.name,
         avatar: user.avatar,
         points: parseInt(user.points) + parseInt(task.points),
-        redeemable:  parseInt(user.redeemable) + parseInt(task.points)
+        redeemable: parseInt(user.redeemable) + parseInt(task.points)
       });
 
     } catch (error) {
