@@ -21,8 +21,14 @@ function TaskDetails(props) {
   const [age, setAge] = React.useState("");
   const [image, setImage] = React.useState("");
   const [user, setUser] = React.useState({});
-  const [task, setTask] = React.useState({});
   const { id } = useParams()
+
+
+  const task = {
+    points: localStorage.getItem("points"),
+    title: localStorage.getItem("title"),
+    id: localStorage.getItem("id")
+  }
 
   // useEffect(() => {
   //   const db = getFirestore();
@@ -59,8 +65,8 @@ function TaskDetails(props) {
       await setDoc(ref_user, {
         name: user.name,
         avatar: user.avatar,
-        points: user.points + task.points,
-        redeemable: user.redeemable + task.points
+        points: parseInt(user.points) + parseInt(task.points),
+        redeemable:  parseInt(user.redeemable) + parseInt(task.points)
       });
 
     } catch (error) {
@@ -77,9 +83,6 @@ function TaskDetails(props) {
     setUser(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
   }
 
-  const getTask = (data) => {
-    setTask(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
-  }
 
 
   const handleChange = (event) => {
@@ -90,7 +93,7 @@ function TaskDetails(props) {
 
   return (
     <div className="task-details">
-      <TaskDescription func={getTask}></TaskDescription>
+      <TaskDescription title={task.title} points={task.points}></TaskDescription>
       <UsersDropdown func={getUser}></UsersDropdown>
       <div className="large-image">
         <ImageCapturer func={pull_data} />

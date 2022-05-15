@@ -21,28 +21,24 @@ function AwardDetails(props) {
   const [image, setImage] = React.useState("");
   const [user, setUser] = React.useState({});
   const { id } = useParams()
-  const [award, setAward] = React.useState([]);
 
-  useEffect(() => {
-    const db = getFirestore();
-
-    async function getData() {
-      debugger
-      const docRef = doc(db, "rewards", id);
-      const awardTmp = await getDoc(docRef);
-      const awardData = awardTmp.data();
-      setAward(awardData)
-    }
-    getData();
-  }, []);
-
+  const award = {
+    points: localStorage.getItem("points-reward"),
+    title: localStorage.getItem("title-reward"),
+    id: localStorage.getItem("id-reward")
+  }
 
   const uploadToFirebase = async () => {
+
+    if (parseInt(user.redeemable) - (award.points) < 0) {
+      toast.error("You do not have enough points to redeem this award.");
+      return;
+    }
     console.log("uploading to firebase");
     // Get a database reference
     const db = getFirestore();
     const storage = getStorage();
-    const ref_c = doc(db, "completed_awards", Math.floor(Math.random() * 1000000).toString());
+    const ref_c = doc(db, "redeemed_rewards", Math.floor(Math.random() * 1000000).toString());
     try {
       await setDoc(ref_c, {
         tid: id,
@@ -56,11 +52,12 @@ function AwardDetails(props) {
       }, 2000);
 
       const ref_user = doc(db, "users", user.id.toString());
+
       await setDoc(ref_user, {
         name: user.name,
         avatar: user.avatar,
-        points: user.points + award.points,
-        redeemable: user.redeemable + award.points
+        points: parseInt(user.points),
+        redeemable: parseInt(user.redeemable) - (award.points)
       });
 
     } catch (error) {
@@ -82,7 +79,6 @@ function AwardDetails(props) {
     setAge(event.target.value);
   };
 
-  const awardImage = templateImage;
 
   return (
     <div className="award-details">

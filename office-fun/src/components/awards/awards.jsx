@@ -7,6 +7,14 @@ import { NavLink } from 'react-router-dom';
 
 
 function AwardCard(props) {
+
+  const saveToLocalStorage = (key, value) => {
+    localStorage.setItem("title-reward", props.title);
+    localStorage.setItem("points-reward", props.points);
+    localStorage.setItem("id-reward", props.id);
+
+  };
+
   return (
     <Card sx={{ display: "flex" }} className="award-card">
       <CardMedia
@@ -24,7 +32,7 @@ function AwardCard(props) {
           </div>
         </div>
         <NavLink points={props.points} to={"../award-details/" + props.id}>
-          <Button variant="contained">Award</Button>
+          <Button onClick={saveToLocalStorage} variant="contained">Award</Button>
         </NavLink>
       </div>
     </Card>
