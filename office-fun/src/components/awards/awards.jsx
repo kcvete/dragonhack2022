@@ -32,7 +32,7 @@ function AwardCard(props) {
           </div>
         </div>
         <NavLink to={"../award-details/" + props.id}>
-          <Button onClick={saveToLocalStorage} variant="contained">Award</Button>
+          <Button onClick={saveToLocalStorage} variant="contained">Redeem</Button>
         </NavLink>
       </div>
     </Card>
