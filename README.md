@@ -21,3 +21,7 @@ Team Bogosort members:
 - Kevin Cvetežar
 - Klavdija Veselko
 - Matic Šincek
+
+## Screenshots
+
+![App Screenshot](https://i.imgur.com/BKIP25T.png)
