@@ -44,7 +44,7 @@ function AwardDetails(props) {
     const ref_c = doc(db, "redeemed_rewards", Math.floor(Math.random() * 1000000).toString());
     try {
       await setDoc(ref_c, {
-        tid: id,
+        rid: id,
         uid: user.id,
         image: image,
         timestamp: Date.now()
