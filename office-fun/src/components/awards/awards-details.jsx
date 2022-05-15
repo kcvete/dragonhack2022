@@ -21,7 +21,6 @@ function AwardDetails(props) {
   const navigate = useNavigate();
   const [age, setAge] = React.useState("");
   const [image, setImage] = React.useState("");
-  const [user, setUser] = React.useState({});
   const { id } = useParams()
 
   const award = {
@@ -31,8 +30,9 @@ function AwardDetails(props) {
     image: localStorage.getItem("image-reward")
   }
 
-  const uploadToFirebase = async () => {
+  const user = JSON.parse(localStorage.getItem('user-local'));
 
+  const uploadToFirebase = async () => {
     if (parseInt(user.redeemable) - (award.points) < 0) {
       toast.error("You do not have enough points to redeem this award.");
       return;
@@ -44,7 +44,7 @@ function AwardDetails(props) {
     const ref_c = doc(db, "redeemed_rewards", Math.floor(Math.random() * 1000000).toString());
     try {
       await setDoc(ref_c, {
-        tid: id,
+        rid: id,
         uid: user.id,
         image: image,
         timestamp: Date.now()
@@ -73,15 +73,9 @@ function AwardDetails(props) {
     setImage(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
   }
 
-  const getUser = (data) => {
-    setUser(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
-  }
-
-
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-
 
   return (
     <div className="award-details">
@@ -96,7 +90,6 @@ function AwardDetails(props) {
         <span className="points-number">{award.points}</span>
         <span> points</span>
       </div>
-      <UsersDropdown func={getUser}></UsersDropdown>
       <div className="large-image">
         <ImageCapturer func={pull_data} />
       </div>
