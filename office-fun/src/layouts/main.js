@@ -7,17 +7,15 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import About from '../components/about/About';
+import AwardsDetails from '../components/awards/awards-details';
+import AwardsList from '../components/awards/awardsList';
 import Contact from '../components/contact/Contact';
-import Home from '../components/home/Home';
 import ImageCapturer from '../components/ImageCapturer';
 import Navbar from '../components/navbar/navbar';
 import TaskDetails from '../components/tasks/tasks-details';
 import TasksList from '../components/tasks/tasksList';
-import AwardsDetails from '../components/awards/awards-details';
-import AwardsList from '../components/awards/awardsList';
 import Profile from '../Profile';
 import Scoreboard from '../Scoreboard';
-
 
 const useStyles = makeStyles({
   root: {
@@ -32,7 +30,7 @@ function Main({ user }) {
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
-      <List>
+      <List className="no-padding">
         <div className="content">
           <Routes>
             <Route path="/" element={<TasksList />} />
