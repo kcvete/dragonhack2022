@@ -3,6 +3,7 @@ import ImageCapture from "react-image-data-capture";
 import { doc, setDoc, collection } from "firebase/firestore";
 import { getFirestore } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { toast } from 'react-toastify';
 
 const ImageCapturer = (props) => {
   const db = getFirestore();
@@ -41,6 +42,7 @@ const ImageCapturer = (props) => {
         .then((url) => {
           console.log(url);
           setImg(url);
+          toast("Image succesfully saved to firebase.");
           props.func(url);
         })
     });

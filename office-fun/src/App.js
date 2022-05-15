@@ -6,7 +6,8 @@ import firebase from './services/firebase';
 import './App.css';
 import Main from './layouts/main';
 
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,6 +23,7 @@ function App() {
   return (
     <div className="app">
       {user ? <Main user={user} /> : <Login />}
+      <ToastContainer />
     </div>
   );
 }

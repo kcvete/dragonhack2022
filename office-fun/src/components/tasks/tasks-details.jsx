@@ -10,8 +10,13 @@ import { doc, setDoc, collection, query, where, getDocs, orderBy } from "firebas
 import UsersDropdown from './usersDropdown';
 
 import templateImage from '../../assets/template-image.png';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
-function TaskDetails() {
+
+function TaskDetails(props) {
+  const navigate = useNavigate();
   const [age, setAge] = React.useState("");
   const [image, setImage] = React.useState("");
   const [user, setUser] = React.useState("");
@@ -21,16 +26,23 @@ function TaskDetails() {
     console.log("uploading to firebase");
     // Get a database reference
     const db = getFirestore();
-    const rndId = Math.floor(Math.random() * 1000000).toString();
-    const ref_c = doc(db, "completed_tasks", rndId);
-    await setDoc(ref_c, {
-      tid: id,
-      uid: user,
-      image: image,
-      timestamp: Date.now()
-    });
-
-    console.log(rndId)
+    const storage = getStorage();
+    const ref_c = doc(db, "completed_tasks", Math.floor(Math.random() * 1000000).toString());
+    try {
+      await setDoc(ref_c, {
+        tid: id,
+        uid: user,
+        image: image,
+        timestamp: Date.now()
+      });
+      toast("Succesfully awarded points.");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      console.log('error: ', error);
+      toast.error("Could not award points");
+    }
   };
 
   const pull_data = (data) => {
